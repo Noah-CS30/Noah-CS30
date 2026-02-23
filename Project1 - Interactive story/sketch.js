@@ -51,6 +51,11 @@ function background1(){
   circle(550, 30, 150);
 }
 
+function background2(){
+
+  
+}
+
 function draw() {
   background("skyblue");
   background1();

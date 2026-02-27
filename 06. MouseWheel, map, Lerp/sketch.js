@@ -19,11 +19,10 @@ function setup() {
 function draw() {
   background(220, 20);
 
-
-
   x = lerp(x, mouseX, 0.15);
   y = lerp(y, mouseY, 0.15);
   line(x,y,mouseX,mouseY);
+  
 
 // x = lerp(0, width, 0.15);
 
@@ -33,6 +32,7 @@ function draw() {
   stroke(r,g,b);
 
   circle(x,y,diameter);
+  triangle();
 
 }
 

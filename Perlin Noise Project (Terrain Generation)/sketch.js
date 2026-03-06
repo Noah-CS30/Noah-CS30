@@ -29,15 +29,23 @@ function draw() {
     rect(x, height, rectWidth, -h);
 
     if(height - h < highestY){
-
+      let peak = highestY;
       
     }
 
   }
 }
 
+function drawFlag(){
 
+  
+}
 function keyPressed(){ // modify the size of the rect by using specific key. 
- // if() <- increase 
- // if() <- decrease 
+  if(key === 'W') {
+
+
+  }
+  if(key === 'S'){
+
+  }
 }

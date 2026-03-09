@@ -7,10 +7,7 @@ let startOffSet = 0;
 let rectWidth = 24;
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
 }
-
-
 function draw() {
   background(220);
 
@@ -29,23 +26,32 @@ function draw() {
     rect(x, height, rectWidth, -h);
 
     if(height - h < highestY){
-      let peak = highestY;
-      
+      highestY = height - h;
+      peakX = x + rectWidth / 2; 
     }
-
+    totalH += h;
+    count++;
+    xOffset += 0.02; // "Step" into the next bit of noise
   }
+// Draw the Flag at the peak 
+  fill(255,0,0);
+  rect(peakX , highestY - 20, 15, 10);
+  line(peakX, highestY, peakX, highestY - 20);
 }
+// Draw the Average line
+  stroke(0,0, 255);
+  let avg = totalH / count;
+  line(0, height - avg, width, height - avg);
+  noStroke();
 
-function drawFlag(){
-
+  startOffset += 0.01; // Pan the terrain for the next frame
   
 }
 function keyPressed(){ // modify the size of the rect by using specific key. 
-  if(key === 'W') {
-
-
+  if(keyCode === LEFT_ARROW) {
+    rectWidth -= 2;
   }
-  if(key === 'S'){
-
+  if(key === RIGHT_ARROW){
+    rectWidth += 2;
   }
 }

@@ -14,6 +14,7 @@ function draw() {
   let xOffset = startOffSet; // let it able to move 
   let highestY = height;
   let peakX = 0;
+  let totalH = 0;
   let ave = 0; // average height 
   let count = 0;
   for(let x = 0; x < width; x += rectWidth){
@@ -37,21 +38,20 @@ function draw() {
   fill(255,0,0);
   rect(peakX , highestY - 20, 15, 10);
   line(peakX, highestY, peakX, highestY - 20);
-}
+  
 // Draw the Average line
   stroke(0,0, 255);
   let avg = totalH / count;
   line(0, height - avg, width, height - avg);
   noStroke();
 
-  startOffset += 0.01; // Pan the terrain for the next frame
-  
+  startOffSet += 0.01; // Pan the terrain for the next frame
 }
 function keyPressed(){ // modify the size of the rect by using specific key. 
   if(keyCode === LEFT_ARROW) {
     rectWidth -= 2;
   }
-  if(key === RIGHT_ARROW){
+  if(keyCode === RIGHT_ARROW){
     rectWidth += 2;
   }
 }

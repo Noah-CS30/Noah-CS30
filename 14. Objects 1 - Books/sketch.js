@@ -8,7 +8,10 @@ function setup() {
   myBook = new Book("CS30 Text", "Noah",
     7013326, "leatherbound" , 500,
     width * 0.3);
- 
+  myBook2 = new Book("Harry Potter", "JK",
+    9999, "softcover", 800,
+    width * 0.4);
+  
 }
 
 
@@ -58,5 +61,5 @@ class Book{
 }
 function draw() {
   background(220);
-  myBook.display();
+  myBook.display
 }

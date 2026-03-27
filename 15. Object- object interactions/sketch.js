@@ -1,96 +1,107 @@
-// Project Title
-// Your Name
-// Date
-
-// Globals
-let nodes = [];
-let reach = 150;
+let eastbound = [];
+let westbound = [];
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(800, 400);
+  
+  // Populate Eastbound Vehicles (Top Lane)
+  for (let i = 0; i < 20; i++) {
+    eastbound.push(new Vehicle(random(width), random(50, 180), 1));
+  }
+  
+  // Populate Westbound Vehicles (Bottom Lane)
+  for (let i = 0; i < 20; i++) {
+    westbound.push(new Vehicle(random(width), random(220, 350), 0));
+  }
 }
 
 function draw() {
-  background(220);
-  // if no deletions, loop by item
-  for(let n of nodes){
-    n.move();
-    n.connect(nodes);
-    n.display();
+  drawRoad();
+
+  // Process Eastbound
+  for (let v of eastbound) {
+    v.action();
+  }
+
+  // Process Westbound
+  for (let v of westbound) {
+    v.action();
   }
 }
 
-function mousePressed(){
-  if(mouseButton === "center"){
-    for(let i = 0; i < 50; i++){
-      let x = random(-50,50);
-      let y = random(-50,50);
-      nodes.push(new csNode(mouseX + x, mouseY + y));
-    }
-  }
-  if( mouseButton === "left"){
-    let n = new csNode(mouseX, mouseY);
-    nodes.push(n);
-
+function drawRoad() {
+  background(50); // Asphalt
+  stroke(255);
+  strokeWeight(4);
+  
+  // Dashed white line
+  for (let i = 0; i < width; i += 40) {
+    line(i, height / 2, i + 20, height / 2);
   }
 }
 
-class csNode{
-  //1. constructor
-  constructor(x,y){
-    //properties related to pos/display
-    this.x = x;  
-    this.y = y; 
-    this.size = 5;
-    this.c = color(random(255),random(255),random(255));
-
-    //properties related to movement
-    this.xTime = random(100); this.yTime = random(100);
-    this.timeShift = 0.01;    this.maxSpeed = 5;
+class Vehicle {
+  constructor(x, y, direction) {
+    this.x = x;
+    this.y = y;
+    this.direction = direction; // 0 for Left, 1 for Right
+    this.type = floor(random(2)); // 0: Car, 1: Truck
+    this.c = color(random(255), random(255), random(255));
+    
+    // Set initial speed based on direction
+    this.xSpeed = (this.direction === 1) ? random(2, 5) : random(-5, -2);
   }
-  //2. Class Methods
-  display(){
-    fill(this.c);
+
+  display() {
     noStroke();
-    circle(this.x, this.y, this.size);
-  }
-  move(){
-    let xSpeed = noise(this.xTime);
-    xSpeed = map(xSpeed,0,1, -this.maxSpeed, this.maxSpeed);
-    this.xTime += this.timeShift;
-
-    this.x += xSpeed;
-    if(this.x < 0){
-      this.x = width;
-    }
-    else if(this.x > width){
-      this.x = 0;
-    }
-
-    let ySpeed = noise(this.yTime);
-    xSpeed = map(ySpeed,0,1, -this.maxSpeed, this.maxSpeed);
-    this.yTime += this.timeShift;
-
-    this.y += xSpeed;
-    if(this.y < 0){
-      this.y = width;
-    }
-    else if(this.y > width){
-      this.y = 0;
+    fill(this.c);
+    if (this.type === 0) {
+      // Draw Car (Simple Rectangle)
+      rect(this.x, this.y, 40, 20);
+      fill(0); rect(this.x + 5, this.y - 2, 10, 5); // Wheels
+    } else {
+      // Draw Truck (Two Rectangles)
+      rect(this.x, this.y, 60, 25);
+      rect(this.x + 40, this.y - 10, 20, 20); // Cab
     }
   }
-  connect(nodeArray){
-    // check if the current csNode is close to any other
-    // csNode, and if so join with a line
-    stroke(this.c);
-    for(let n of nodeArray){
-      if( n !== this){
-        let d = dist(this.x, this.y, n.x, n.y);
-        if(d < reach){
-          line(this.x, this.y, n.x, n.y);
-        }
-      }
+
+  move() {
+    this.x += this.xSpeed;
+
+    // Wrap around logic
+    if (this.x > width) this.x = -60;
+    if (this.x < -60) this.x = width;
+  }
+
+  speedUp() {
+    if (this.direction === 1 && this.xSpeed < 15) {
+      this.xSpeed += 0.2;
+    } else if (this.direction === 0 && this.xSpeed > -15) {
+      this.xSpeed -= 0.2;
     }
+  }
+
+  speedDown() {
+    if (this.direction === 1 && this.xSpeed > 0.5) {
+      this.xSpeed -= 0.2;
+    } else if (this.direction === 0 && this.xSpeed < -0.5) {
+      this.xSpeed += 0.2;
+    }
+  }
+
+  changeColor() {
+    this.c = color(random(255), random(255), random(255));
+  }
+
+  action() {
+    this.move();
+    
+    // 1% chances (0.01)
+    if (random(1) < 0.01) this.speedUp();
+    if (random(1) < 0.01) this.speedDown();
+    if (random(1) < 0.01) this.changeColor();
+    
+    this.display();
   }
 }
-

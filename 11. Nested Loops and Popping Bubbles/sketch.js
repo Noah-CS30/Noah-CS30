@@ -33,7 +33,7 @@ function drawBubbles(){
     // bubbles, and then delete if so:
     if(d < bubblesSize / 2) {
       // to delete from array, use,
-
+      
     }
     
   }

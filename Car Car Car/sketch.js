@@ -103,7 +103,44 @@ function KeyPressed(){
     constructor(){
       this.isRed = false;
       this.timer = 0;
-  
   }
+    turnRed(){
+      this.isRed = true;
+      this.timer = 120;
+    }
+    update(){
+      if(this.isRed){
+        this.timer--;
+        if(this.timer <= 0){
+          this.isRed = false;
+        }
+      }
+    }
+    display(){
+      push();
+      translate(width - 50, 60);
+      fill(30);
+      rect(0,0,40,80,5);
 
+      // red light 
+      if(this.isRed === true){
+        fill(255,0,0);
+      }
+      else{
+        fill(0,50,0);
+      }
+      ellipse(0,15, 25);
+
+      // green light
+      if(this.isRed === true){
+        fill(0,255,0);
+      }
+      else{
+        fill(0,50,0);
+      }
+      ellipse(0,15, 25);
+
+      pop();
+
+    }      
 }

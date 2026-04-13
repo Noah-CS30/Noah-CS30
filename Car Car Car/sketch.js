@@ -116,31 +116,31 @@ function KeyPressed(){
         }
       }
     }
-    display(){
-      push();
-      translate(width - 50, 60);
-      fill(30);
-      rect(0,0,40,80,5);
+  display(){
+    push();
+    translate(width - 50, 60);
+    fill(30);
+    rect(0,0,40,80,5);
 
       // red light 
-      if(this.isRed === true){
-        fill(255,0,0);
-      }
-      else{
-        fill(0,50,0);
-      }
-      ellipse(0,15, 25);
+    if(this.isRed === true){
+      fill(255,0,0);
+    }
+    else{
+      fill(0,50,0);
+    }
+    ellipse(0,15, 25);
 
-      // green light
-      if(this.isRed === true){
-        fill(0,255,0);
-      }
-      else{
-        fill(0,50,0);
-      }
-      ellipse(0,15, 25);
+    // green light
+    if(this.isRed === true){
+      fill(0,255,0);
+    }
+    else{
+      fill(0,50,0);
+    }
+    ellipse(0,15, 25);
 
-      pop();
+    pop();
 
     }      
 }

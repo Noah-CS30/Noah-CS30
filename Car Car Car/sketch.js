@@ -38,8 +38,8 @@ function drawR(){
   for (let i = 0; i < width; i+= 40){
     line(i, height / 2, i + 20, height / 2);
   }
-
-function KeyPressed(){
+}
+function keyPressed(){
   if ( key === ' '){
     trafficL.turnRed();
   }
@@ -94,7 +94,7 @@ function KeyPressed(){
         this.move();
         if ( random(100) < 1) this.speedUp();
         if ( random(100) < 1) this.speedDown();
-        if ( random(100) < 1) this.speedColor();
+        if ( random(100) < 1) this.changeC();
       }
       this.display();
     }
@@ -103,7 +103,7 @@ function KeyPressed(){
     constructor(){
       this.isRed = false;
       this.timer = 0;
-  }
+    }
     turnRed(){
       this.isRed = true;
       this.timer = 120;
@@ -127,12 +127,12 @@ function KeyPressed(){
       fill(255,0,0);
     }
     else{
-      fill(0,50,0);
+      fill(50,0,0);
     }
-    ellipse(0,15, 25);
+    ellipse(0,-15, 25);
 
     // green light
-    if(this.isRed === true){
+    if(this.isRed !== true){
       fill(0,255,0);
     }
     else{
@@ -142,5 +142,5 @@ function KeyPressed(){
 
     pop();
 
-    }      
+  }      
 }

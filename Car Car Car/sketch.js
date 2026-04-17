@@ -22,7 +22,7 @@ function draw() {
   trafficL.update();
   trafficL.display();
 
-  for ( let k of eastbound){
+  for (let k of eastbound){
     k.action(trafficL.isRed);
   }
 
@@ -122,7 +122,7 @@ function keyPressed(){
     fill(30);
     rect(0,0,40,80,5);
 
-      // red light 
+    // red light 
     if(this.isRed === true){
       fill(255,0,0);
     }

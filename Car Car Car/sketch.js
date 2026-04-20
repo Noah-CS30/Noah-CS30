@@ -30,6 +30,15 @@ function draw() {
     k.action(trafficL.isRed);
   }  
 }
+
+function mousePressed(){
+  if(keyIsDown(SHIFT)){
+    westbound.push(new Cars(mouseX, mouseY, 0));
+  }
+  else{
+    eastbound.push(new Cars(mouseX, mouseY, 1));
+  }
+}
 function drawR(){
   background(50);
   stroke(255);
@@ -69,6 +78,7 @@ function keyPressed(){
       }
     }
 
+    
     move(){
       this.x += this.xSpeed;
       if(this.x > width + 50) this.x = -50;

@@ -5,9 +5,9 @@
 let textFile;
 let imgFile, rows, cols, colorMap;
 
-async function loadAssets(){
+ function preload(){
   textFile = loadStrings("assets/info.txt");
-  imgFile = loadStrings("assets/image.txt");
+  imgFile = loadStrings("assets/colorImage.txt");
 }
 
 async function setup() {

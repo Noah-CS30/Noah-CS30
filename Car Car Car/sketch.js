@@ -43,14 +43,14 @@ function drawR(){
   background(50);
   stroke(255);
 
-  // Dashed white line
+  // Dashed white middle line
   for (let i = 0; i < width; i+= 40){
     line(i, height / 2, i + 20, height / 2);
   }
 }
 function keyPressed(){
   if ( key === ' '){
-    trafficL.turnRed();
+    trafficL.turnRed(); // press space -> freeze -> after few seconds, vehicle can move
   }
 }
   class Cars{
@@ -79,7 +79,7 @@ function keyPressed(){
     }
 
     
-    move(){
+    move(){ // adjusting speed of car and truck
       this.x += this.xSpeed;
       if(this.x > width + 50) this.x = -50;
       if(this.x < -50) this.x = width + 50;
@@ -109,7 +109,7 @@ function keyPressed(){
       this.display();
     }
   }
-  class TrafficL{
+  class TrafficL{ 
     constructor(){
       this.isRed = false;
       this.timer = 0;
@@ -126,7 +126,7 @@ function keyPressed(){
         }
       }
     }
-  display(){
+  display(){ // light sign
     push();
     translate(width - 50, 60);
     fill(30);

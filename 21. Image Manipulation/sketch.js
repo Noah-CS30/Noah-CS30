@@ -6,6 +6,7 @@
 // translation b/w 2D and 1D indices
 let pixel = [];
 let myImage;
+let myVideo;
 
 function preload(){
   //called BEFORE setup. Won't conclude
@@ -13,25 +14,46 @@ function preload(){
   myImage = loadImage("assets/aviator.png");
 }
 function setup() {
-  createCanvas(myImage.width, myImage.height);
+  createCanvas(640, 480);
+  myVideo = createCapture(VIDEO);
   pixelDensity(1);
 }
-2
-function draw() {2
+
+function draw() {
   background(220);
-  image(myImage,0,0);
+  image(myVideo,0,0);
 
   // access and modify pixels on the Canvas
   loadPixels();   // dumps data from canvas into array
-  boost();
-  updatePixels
+  background(0);
+  textImage();
+//boost();
+
 //  for(let i = 0; i < 500; i+=4){
 //    pixel[i] = 255;
 //  }
- 
-  updatePixels();
+//  updatePixels();
 }
 
+
+function textImage(){
+  fill(255);
+  let scaleAmount = 2;
+  textSize(scaleAmount);
+
+  for(let x = 0; x < width; x += scaleAmount){
+    for(let y = 0; y < height; y += scaleAmount){
+      let avg = getAvg(x,y); // 0~255
+      if(avg > 210) text("%",x,y);
+      else if(avg > 170) text("T",x,y);
+      else if(avg > 130) text("x",x,y);
+      else if(avg > 90) text(":",x,y);
+      else if(avg > 45) text(".",x,y);
+
+
+    }
+  }
+}
 function boost(){
   //brightening filter
   let boostAmount = map(mouseX, 0, width, -100, 100); 

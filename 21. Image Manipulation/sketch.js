@@ -27,7 +27,7 @@ function draw() {
   loadPixels();   // dumps data from canvas into array
   background(0);
   textImage();
-//boost();
+//  boost();
 
 //  for(let i = 0; i < 500; i+=4){
 //    pixel[i] = 255;

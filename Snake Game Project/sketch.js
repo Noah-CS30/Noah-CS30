@@ -1,10 +1,16 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// Snake Game Project
+// Noah
 
+let snake;
+let food;
+let gameOver = false;
+let score;
+
+let assets = {};
+
+function imageL(){
+  
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
